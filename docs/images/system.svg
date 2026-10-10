@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, sans-serif">
+<defs>
+<marker id="b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#3b6be0"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#4f9a5e"/></marker>
+<marker id="o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#a8551c"/></marker>
+<marker id="r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#d23b2f"/></marker>
+</defs>
+<rect width="1000" height="470" rx="14" fill="#f6f7f5"/>
+<text x="32" y="44" font-size="22" font-weight="700" fill="#1d2125">현맥 구성: 분대원마다 "폰 + 단말" 한 쌍</text>
+<text x="32" y="68" font-size="13" fill="#6b7177">폰 = GPS·키보드 / 단말 = 방향 측정·암호 방송 / 분대장·분대원 구분 없음</text>
+<rect x="20" y="88" width="960" height="364" rx="12" fill="#fff"/>
+
+<g>
+<rect x="44" y="110" width="240" height="120" rx="12" fill="#eef4ef" stroke="#4f7d58" stroke-width="1.5"/>
+<text x="164" y="134" font-size="15" font-weight="700" fill="#2f5d38" text-anchor="middle">분대원 E-1</text>
+<rect x="62" y="148" width="72" height="66" rx="8" fill="#161b26"/>
+<text x="98" y="178" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">아이폰</text>
+<text x="98" y="197" font-size="10.5" fill="#aab2bd" text-anchor="middle">GPS·메시지</text>
+<rect x="196" y="154" width="72" height="54" rx="7" fill="#3c7048"/>
+<text x="232" y="178" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">단말</text>
+<text x="232" y="196" font-size="10.5" fill="#d5e8d9" text-anchor="middle">방향·버튼</text>
+<line x1="138" y1="172" x2="190" y2="172" stroke="#4f9a5e" stroke-width="2.5" marker-end="url(#g)"/>
+<line x1="192" y1="190" x2="140" y2="190" stroke="#4f9a5e" stroke-width="2.5" marker-end="url(#g)"/>
+<text x="165" y="164" font-size="9.5" fill="#4f9a5e" text-anchor="middle">1:1 인증</text>
+</g>
+<g transform="translate(0,200)">
+<rect x="44" y="110" width="240" height="120" rx="12" fill="#eef4ef" stroke="#4f7d58" stroke-width="1.5"/>
+<text x="164" y="134" font-size="15" font-weight="700" fill="#2f5d38" text-anchor="middle">분대원 E-2</text>
+<rect x="62" y="148" width="72" height="66" rx="8" fill="#161b26"/>
+<text x="98" y="178" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">아이폰</text>
+<text x="98" y="197" font-size="10.5" fill="#aab2bd" text-anchor="middle">GPS·메시지</text>
+<rect x="196" y="154" width="72" height="54" rx="7" fill="#3c7048"/>
+<text x="232" y="178" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">단말</text>
+<text x="232" y="196" font-size="10.5" fill="#d5e8d9" text-anchor="middle">방향·버튼</text>
+<line x1="138" y1="172" x2="190" y2="172" stroke="#4f9a5e" stroke-width="2.5" marker-end="url(#g)"/>
+<line x1="192" y1="190" x2="140" y2="190" stroke="#4f9a5e" stroke-width="2.5" marker-end="url(#g)"/>
+<text x="165" y="164" font-size="9.5" fill="#4f9a5e" text-anchor="middle">1:1 인증</text>
+</g>
+
+<line x1="232" y1="212" x2="232" y2="348" stroke="#3b6be0" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#b)"/>
+<line x1="246" y1="350" x2="246" y2="214" stroke="#3b6be0" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#b)"/>
+<text x="262" y="276" font-size="13" font-weight="700" fill="#3b6be0">암호 BLE 방송</text>
+<text x="262" y="294" font-size="11.5" fill="#3b6be0">적 방향 · 위치 · 메시지</text>
+
+<path d="M272,180 C420,180 470,250 560,262" fill="none" stroke="#3b6be0" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#b)"/>
+<path d="M272,380 C420,380 470,310 560,296" fill="none" stroke="#3b6be0" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#b)"/>
+
+<rect x="566" y="244" width="150" height="70" rx="10" fill="#26388a"/>
+<text x="641" y="274" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">NU-87</text>
+<text x="641" y="295" font-size="11.5" fill="#c9d2f2" text-anchor="middle">게이트웨이</text>
+
+<line x1="720" y1="268" x2="800" y2="268" stroke="#a8551c" stroke-width="2.5" marker-end="url(#o)"/>
+<text x="760" y="258" font-size="11" fill="#a8551c" text-anchor="middle">Wi-Fi 보고</text>
+<line x1="802" y1="294" x2="722" y2="294" stroke="#d23b2f" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#r)"/>
+<text x="762" y="314" font-size="11" fill="#d23b2f" text-anchor="middle">명령</text>
+<text x="762" y="329" font-size="10" fill="#d23b2f" text-anchor="middle">송신 때만</text>
+
+<rect x="806" y="226" width="152" height="106" rx="10" fill="#f2f3f5" stroke="#3a3f45" stroke-width="1.5"/>
+<text x="882" y="262" font-size="18" font-weight="700" fill="#1d2125" text-anchor="middle">C2</text>
+<text x="882" y="286" font-size="12" fill="#3a3f45" text-anchor="middle">지도 · 보고</text>
+<text x="882" y="305" font-size="12" fill="#3a3f45" text-anchor="middle">명령 하달</text>
+</svg>
