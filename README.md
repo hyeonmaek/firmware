@@ -8,7 +8,6 @@
 
 [firmware](https://github.com/hyeonmaek/firmware) · [app](https://github.com/hyeonmaek/app) · [web](https://github.com/hyeonmaek/web)
 
-![분대원마다 폰과 단말이 한 쌍. 단말끼리 암호 BLE 방송, NU-87 게이트웨이가 C2와 연결](docs/images/system.svg)
 
 ![분대원마다 아이폰과 단말이 한 쌍. 폰은 단말에 GPS를 보내고 문자를 주고받는다. 단말끼리는 암호 BLE로 연결되고, 폰끼리는 직접 연결하지 않는다. 단말은 NU-87을 거쳐 C2에 교전·긴급구호·중앙행 문자와 GPS를 보고하고, 명령은 송신 때만 내려온다](docs/images/signals.svg)
 
