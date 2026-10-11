@@ -1,3 +1,5 @@
+<img src="docs/images/logo.png" width="120" alt="현맥">
+
 # 현맥 · 단말 펌웨어
 
 **"3시 방향!" 대신, 정확한 적 방향을.**
