@@ -49,7 +49,7 @@ volatile unsigned long advTotal = 0;  // 진단: 받은 블루투스 방송 전�
 volatile unsigned long advSquad = 0;  // 진단: 그중 대원 보드 방송 개수
 
 // 중앙 지휘소 서버 (노트북). 분대 보고를 올릴 때만 접속(지금은 와이파이 상시 연결, mTLS는 배치 시).
-IPAddress CENTRAL_IP(192, 168, 0, 24);
+IPAddress CENTRAL_IP(192, 168, 0, 252);
 const uint16_t CENTRAL_PORT = 8090;
 // 이벤트 코드(단말과 동일): 2=SOS, 3=적발견 사격개시, 6=정정 → 이 셋만 중앙 업로드
 volatile bool uploadPending = false;
@@ -390,7 +390,12 @@ void startWifi() {
 #else
   char ssid[] = WIFI_SSID;
   char pass[] = WIFI_PASS;
-  printNearbyNetworks();
+  printNearbyNetworks();   // 여기서 와이파이 드라이버가 켜진다
+  // 행사장에 같은 NU-87이 여러 대라 공장 기본 MAC(00:e0:4c:87:00:00)이 겹쳐 통신이 섞인다(10/11 행사장 와이파이).
+  // 칩(efuse)에 쓰지 않고 RAM에서만, 접속 전에 우리 고유 MAC으로 바꾼다(로컬 관리 주소 02:..).
+  u8 myMac[6] = {0x02, 0x4D, 0x41, 0x45, 0x4B, 0x01};   // "MAEK" 01
+  Serial.print("MAC CHANGE ");
+  Serial.println(wifi_change_mac_address_from_ram(0, myMac) == RTW_SUCCESS ? "ok" : "FAIL");
   int status = WL_IDLE_STATUS;
   for (int attempt = 1; status != WL_CONNECTED; attempt++) {
     Serial.print("WIFI CONNECT TRY ");
