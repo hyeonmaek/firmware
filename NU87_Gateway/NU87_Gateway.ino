@@ -10,6 +10,9 @@
 // USE_AP_MODE 1: NU-87이 직접 와이파이(SQUAD-C2)를 만든다(발표/오프라인용, 주소 192.168.1.1)
 // USE_AP_MODE 0: secrets.h의 와이파이에 접속한다(개발용, 노트북 인터넷 유지)
 #include <WiFi.h>
+#include "wifi_drv.h"
+#include "lwip/netif.h"
+extern struct netif xnetif[];   // 와이파이 드라이버의 네트워크 인터페이스(wifi_drv.cpp)
 #include "BLEDevice.h"
 #include "secrets.h"
 extern "C" {
@@ -51,6 +54,8 @@ volatile unsigned long advSquad = 0;  // 진단: 그중 대원 보드 방송 개
 // 중앙 지휘소 서버 (노트북). 분대 보고를 올릴 때만 접속(지금은 와이파이 상시 연결, mTLS는 배치 시).
 IPAddress CENTRAL_IP(192, 168, 0, 252);
 const uint16_t CENTRAL_PORT = 8090;
+// 행사장에서 DHCP 주소(.51)를 다른 팀 NU-87과 겹쳐 받아 통신이 섞였다 → 비어 있는 고정 주소 사용
+IPAddress MY_IP(192, 168, 0, 233), MY_GW(192, 168, 0, 1), MY_MASK(255, 255, 255, 0);
 // 이벤트 코드(단말과 동일): 2=SOS, 3=적발견 사격개시, 6=정정 → 이 셋만 중앙 업로드
 volatile bool uploadPending = false;
 volatile uint8_t upFrom = 0, upEvent = 0;
@@ -390,12 +395,14 @@ void startWifi() {
 #else
   char ssid[] = WIFI_SSID;
   char pass[] = WIFI_PASS;
-  printNearbyNetworks();   // 여기서 와이파이 드라이버가 켜진다
-  // 행사장에 같은 NU-87이 여러 대라 공장 기본 MAC(00:e0:4c:87:00:00)이 겹쳐 통신이 섞인다(10/11 행사장 와이파이).
-  // 칩(efuse)에 쓰지 않고 RAM에서만, 접속 전에 우리 고유 MAC으로 바꾼다(로컬 관리 주소 02:..).
-  u8 myMac[6] = {0x02, 0x4D, 0x41, 0x45, 0x4B, 0x01};   // "MAEK" 01
-  Serial.print("MAC CHANGE ");
-  Serial.println(wifi_change_mac_address_from_ram(0, myMac) == RTW_SUCCESS ? "ok" : "FAIL");
+  // 행사장에 같은 NU-87이 여러 대라 공장 기본 MAC(00:e0:4c:87:00:00)이 겹친다 → 공유기가 1분마다 끊음(10/11).
+  // 와이파이를 켜자마자(검색·접속 전) RAM에서만 우리 고유 MAC으로 바꾼다(칩 efuse에는 안 씀).
+  WiFiDrv::wifiDriverInit();   // 와이파이 켜기(접속 전)
+  u8 myMac[6] = {0x02, 0x4D, 0x41, 0x45, 0x4B, 0x01};   // "MAEK" 01, 로컬 관리 주소
+  int macRet = wifi_change_mac_address_from_ram(0, myMac);
+  if (macRet == RTW_SUCCESS) memcpy(xnetif[0].hwaddr, myMac, 6);   // ARP 응답도 같은 주소로
+  Serial.print("MAC CHANGE ret="); Serial.println(macRet);
+  WiFi.config(MY_IP, MY_GW, MY_GW, MY_MASK);
   int status = WL_IDLE_STATUS;
   for (int attempt = 1; status != WL_CONNECTED; attempt++) {
     Serial.print("WIFI CONNECT TRY ");
@@ -438,6 +445,7 @@ void checkWifi() {
   server.end();
   char ssid[] = WIFI_SSID;
   char pass[] = WIFI_PASS;
+  WiFi.config(MY_IP, MY_GW, MY_GW, MY_MASK);
   while (WiFi.begin(ssid, pass) != WL_CONNECTED) delay(3000);
   WiFi.disablePowerSave();
   server.begin();
